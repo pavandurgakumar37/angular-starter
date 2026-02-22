@@ -1,0 +1,29 @@
+<div class="products-container">
+  <h2>Simple Products Component</h2>
+  <p>This component makes direct HTTP requests to the API.</p>
+  
+  <div *ngIf="isLoading" class="loading">
+    Loading products...
+  </div>
+  
+  <div *ngIf="errorMessage" class="error">
+    Error: {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="!isLoading && !errorMessage">
+    <p>Found {{ products.length }} products</p>
+    <button (click)="loadProducts()">Refresh Products</button>
+    <ul>
+      <li *ngFor="let product of products">
+        {{ product.name }} - ${{ product.price }}
+      </li>
+    </ul>
+  </div>
+  
+  <div class="debug-info">
+    <h3>Debug Information:</h3>
+    <p>API URL: {{ apiUrl }}</p>
+    <p>Component Status: {{ componentStatus }}</p>
+    <p>Last API Call: {{ lastApiCall }}</p>
+  </div>
+</div>

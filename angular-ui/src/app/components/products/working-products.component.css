@@ -1,0 +1,139 @@
+.products-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h2 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+.refresh-btn, .retry-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.refresh-btn:hover, .retry-btn:hover {
+  background-color: #0056b3;
+}
+
+.refresh-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  text-align: center;
+  padding: 40px;
+  background-color: #f8d7da;
+  border-radius: 8px;
+  color: #721c24;
+}
+
+.error h3 {
+  margin-top: 0;
+  color: #721c24;
+}
+
+.retry-btn {
+  margin-top: 20px;
+  background-color: #dc3545;
+}
+
+.retry-btn:hover {
+  background-color: #c82333;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  height: 200px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-icon {
+  font-size: 48px;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-info h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}

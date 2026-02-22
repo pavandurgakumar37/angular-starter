@@ -1,0 +1,29 @@
+<div class="users-container">
+  <h2>Simple Users Component</h2>
+  <p>This component makes direct HTTP requests to the API.</p>
+  
+  <div *ngIf="isLoading" class="loading">
+    Loading users...
+  </div>
+  
+  <div *ngIf="errorMessage" class="error">
+    Error: {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="!isLoading && !errorMessage">
+    <p>Found {{ users.length }} users</p>
+    <button (click)="loadUsers()">Refresh Users</button>
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.name }} ({{ user.email }})
+      </li>
+    </ul>
+  </div>
+  
+  <div class="debug-info">
+    <h3>Debug Information:</h3>
+    <p>API URL: {{ apiUrl }}</p>
+    <p>Component Status: {{ componentStatus }}</p>
+    <p>Last API Call: {{ lastApiCall }}</p>
+  </div>
+</div>

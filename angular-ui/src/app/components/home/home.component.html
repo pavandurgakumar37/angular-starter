@@ -1,0 +1,33 @@
+<div class="home-container">
+  <div class="hero-section">
+    <h1>{{ title }}</h1>
+    <p>A simple Angular application that demonstrates HTTP requests to a Spring Boot API</p>
+  </div>
+  
+  <div class="features-section">
+    <h2>Features</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <h3>Users</h3>
+        <p>View and manage user data from the API</p>
+        <a routerLink="/users" class="btn btn-primary">View Users</a>
+      </div>
+      
+      <div class="feature-card">
+        <h3>Products</h3>
+        <p>Browse products from the API</p>
+        <a routerLink="/products" class="btn btn-primary">View Products</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="api-status">
+    <h2>API Status</h2>
+    <p>This application connects to a Spring Boot API at localhost:8080</p>
+    <p>API endpoints:</p>
+    <ul>
+      <li><code>/api/users</code> - Returns a list of users</li>
+      <li><code>/api/products</code> - Returns a list of products</li>
+    </ul>
+  </div>
+</div>
