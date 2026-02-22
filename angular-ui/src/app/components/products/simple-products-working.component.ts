@@ -44,6 +44,7 @@ import { Product } from '../../models/product.model';
 export class SimpleProductsWorkingComponent implements OnInit {
   products: Product[] = [];
   isLoading = true;
+  private dataLoaded = false;
 
   constructor(private http: HttpClient) {
     console.log('SimpleProductsWorkingComponent: Constructor');
@@ -51,15 +52,24 @@ export class SimpleProductsWorkingComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('SimpleProductsWorkingComponent: ngOnInit - loading products');
+    if (!this.dataLoaded) {
+      this.loadProducts();
+    }
+  }
+
+  loadProducts(): void {
+    console.log('SimpleProductsWorkingComponent: Loading products from API');
     this.http.get<Product[]>('/api/products').subscribe({
       next: (data) => {
         console.log('SimpleProductsWorkingComponent: Got products:', data);
         this.products = data;
         this.isLoading = false;
+        this.dataLoaded = true;
       },
       error: (error) => {
         console.error('SimpleProductsWorkingComponent: Error:', error);
         this.isLoading = false;
+        this.dataLoaded = true;
       }
     });
   }

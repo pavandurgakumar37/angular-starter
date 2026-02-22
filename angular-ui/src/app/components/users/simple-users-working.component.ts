@@ -44,6 +44,7 @@ import { User } from '../../models/user.model';
 export class SimpleUsersWorkingComponent implements OnInit {
   users: User[] = [];
   isLoading = true;
+  private dataLoaded = false;
 
   constructor(private http: HttpClient) {
     console.log('SimpleUsersWorkingComponent: Constructor');
@@ -51,15 +52,24 @@ export class SimpleUsersWorkingComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('SimpleUsersWorkingComponent: ngOnInit - loading users');
+    if (!this.dataLoaded) {
+      this.loadUsers();
+    }
+  }
+
+  loadUsers(): void {
+    console.log('SimpleUsersWorkingComponent: Loading users from API');
     this.http.get<User[]>('/api/users').subscribe({
       next: (data) => {
         console.log('SimpleUsersWorkingComponent: Got users:', data);
         this.users = data;
         this.isLoading = false;
+        this.dataLoaded = true;
       },
       error: (error) => {
         console.error('SimpleUsersWorkingComponent: Error:', error);
         this.isLoading = false;
+        this.dataLoaded = true;
       }
     });
   }
