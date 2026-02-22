@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
-  isLoading = false;
+  isLoading = true;
   errorMessage: string | null = null;
   private apiUrl = '/api/users';
 
@@ -35,14 +34,18 @@ export class UsersComponent implements OnInit {
   }
 
   loadUsers(): void {
-    console.log('UsersComponent: Loading dummy data immediately');
-    this.users = [
-      { id: 1, name: 'John Doe', email: 'john.doe@example.com', phone: '+1-555-0101' },
-      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', phone: '+1-555-0102' },
-      { id: 3, name: 'Bob Johnson', email: 'bob.johnson@example.com', phone: '+1-555-0103' },
-      { id: 4, name: 'Alice Brown', email: 'alice.brown@example.com', phone: '+1-555-0104' },
-      { id: 5, name: 'Charlie Wilson', email: 'charlie.wilson@example.com', phone: '+1-555-0105' }
-    ];
-    console.log('UsersComponent: Dummy data loaded, users:', this.users);
+    console.log('UsersComponent: Loading data from API');
+    this.http.get<User[]>(this.apiUrl).subscribe({
+      next: (data) => {
+        console.log('UsersComponent: Successfully received users data:', data);
+        this.users = data;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('UsersComponent: Error loading users:', error);
+        this.users = [];
+        this.isLoading = false;
+      }
+    });
   }
 }

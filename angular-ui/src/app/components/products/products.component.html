@@ -10,11 +10,8 @@
     <button (click)="loadProducts()" class="retry-btn">Retry</button>
   </div>
   
-  <div *ngIf="!isLoading && !errorMessage && products.length === 0" class="no-data">
-    <p>No products found.</p>
-  </div>
-  
-  <div *ngIf="!isLoading && !errorMessage && products.length > 0" class="products-table">
+  <div *ngIf="products && products.length > 0" class="products-table">
+    <p>Found {{ products.length }} products</p>
     <table>
       <thead>
         <tr>
@@ -33,5 +30,9 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  
+  <div *ngIf="!isLoading && !errorMessage && (!products || products.length === 0)" class="no-data">
+    <p>No products found.</p>
   </div>
 </div>

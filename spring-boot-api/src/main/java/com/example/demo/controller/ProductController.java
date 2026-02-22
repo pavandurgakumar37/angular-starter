@@ -22,7 +22,7 @@ public class ProductController {
         new Product(2L, "Smartphone", "Latest smartphone with 5G connectivity and 128GB storage", 899.99),
         new Product(3L, "Headphones", "Wireless noise-cancelling headphones with 30-hour battery life", 249.99),
         new Product(4L, "Smartwatch", "Fitness tracking smartwatch with heart rate monitor", 199.99),
-        new Product(5L, "Tablet", "10-inch tablet with stylus support and 64GB storage", 449.99)
+        new Product(5L, "Huhuhuhuh", "10-inch tablet with stylus support and 64GB storage", 449.99)
     );
     
     @GetMapping
