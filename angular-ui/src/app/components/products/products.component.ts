@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../../models/product.model';
@@ -15,14 +15,17 @@ export class ProductsComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
   private apiUrl = '/api/products';
+  private dataLoaded = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {
     console.log('ProductsComponent: Constructor called');
   }
 
   ngOnInit(): void {
     console.log('ProductsComponent: ngOnInit called');
-    this.loadProducts();
+    if (!this.dataLoaded) {
+      this.loadProducts();
+    }
   }
   
   ngAfterViewInit(): void {
@@ -40,11 +43,15 @@ export class ProductsComponent implements OnInit {
         console.log('ProductsComponent: Successfully received products data:', data);
         this.products = data;
         this.isLoading = false;
+        this.dataLoaded = true;
+        this.cd.detectChanges();
       },
       error: (error) => {
         console.error('ProductsComponent: Error loading products:', error);
         this.products = [];
         this.isLoading = false;
+        this.dataLoaded = true;
+        this.cd.detectChanges();
       }
     });
   }

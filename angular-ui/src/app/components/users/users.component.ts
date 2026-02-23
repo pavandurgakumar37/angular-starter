@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
@@ -15,14 +15,17 @@ export class UsersComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
   private apiUrl = '/api/users';
+  private dataLoaded = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {
     console.log('UsersComponent: Constructor called');
   }
 
   ngOnInit(): void {
     console.log('UsersComponent: ngOnInit called');
-    this.loadUsers();
+    if (!this.dataLoaded) {
+      this.loadUsers();
+    }
   }
   
   ngAfterViewInit(): void {
@@ -40,11 +43,15 @@ export class UsersComponent implements OnInit {
         console.log('UsersComponent: Successfully received users data:', data);
         this.users = data;
         this.isLoading = false;
+        this.dataLoaded = true;
+        this.cd.detectChanges();
       },
       error: (error) => {
         console.error('UsersComponent: Error loading users:', error);
         this.users = [];
         this.isLoading = false;
+        this.dataLoaded = true;
+        this.cd.detectChanges();
       }
     });
   }
